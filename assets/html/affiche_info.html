@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <title>Acceuil</title>
-</head>
+    <title>Information compte</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 
-<body>
-    <nav>
-        <img id="bandeau" src="assets/img/Bandeaux.png" alt="Bandeaux">
+    <body>
+        <nav>
+        <img id="bandeau" src="../img/Bandeaux.png" alt="Bandeaux">
         <h1 id="titre">SpeedCircuit</h1>
-        <div id="acceuil" class="active_bleu">
-            <a href="#">
+        <div id="acceuil">
+            <a href="../../index.html">
                 <p>Acceuil</p>
             </a>
         </div>
         <div id="information">
-            <a href="assets/html/affiche_info.html">
+            <a href="">
                 <p>Informations</p>
             </a>
         </div>
@@ -33,12 +32,14 @@
             </a>
         </div>
 
-        <div id="compte">
-            <a href="assets/html/inscription.html">
-                <img src="assets/img/logo_compte.png" alt="Compte">
+        <div id="compte" class="active_rouge">
+            <a href="#">
+                <img src="../img/logo_compte.png" alt="Compte">
             </a>
         </div>
     </nav>
-</body>
+        <h1>Informations du compte</h1>
 
+        <script src="asset/js/recup_info.js"></script>
+    </body>
 </html>
