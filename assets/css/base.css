@@ -1,0 +1,107 @@
+/**
+    Fichier css qui permets d'avoir la base de la page c'est à dire le fond d'écran ainsi que le bandeaux de navigation
+*/
+#bandeau {
+    border-radius: 30px;
+}
+
+body {
+    background-image: url(../img/image.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+#titre {
+    font-family: cursive;
+    color: white;
+    margin-top: -55px;
+    margin-left: 21px;
+    font-size: 20px;
+}
+
+#acceuil {
+    position: relative;
+    margin-right: 1000px;
+    margin-left: 300px;
+    padding-bottom: 7px;
+    margin-top: -79px;
+}
+
+#acceuil p {
+    margin-left: 70px;
+    margin-top: 30px;
+    padding-top: 22px;
+}
+
+#information {
+    position: relative;
+    margin-right: 525px;
+    margin-left: 825px;
+    padding-top: 1px;
+    margin-top: -72px;
+    padding-bottom: 3px;
+}
+
+#information p {
+    padding-top: 5px;
+    margin-left: 30px;
+}
+
+#reserver {
+    position: relative;
+    margin-right: 345px;
+    margin-left: 1005px;
+    padding-top: 1px;
+    margin-top: -73px;
+    padding-bottom: 5px;
+}
+
+#reserver p {
+    margin-top: 13px;
+    margin-left: 40px;
+    padding-top: 10px;
+}
+
+#evenement {
+    position: relative;
+    margin-right: 190px;
+    margin-left: 1183px;
+    padding-top: 3px;
+    margin-top: -72px;
+    padding-bottom: 6px;
+}
+
+#evenement p {
+    margin-left: 18px;
+}
+
+#compte {
+    position: relative;
+    margin-right: 60px;
+    margin-left: 1372px;
+    padding-top: 12px;
+    margin-top: -72px;
+    padding-bottom: 5px;
+}
+
+#compte img {
+    padding-left: 18px;
+}
+
+.active_bleu {
+    background-color: #1f03cf;
+}
+
+.active_rouge {
+    background-color: #ab2b2b;
+}
