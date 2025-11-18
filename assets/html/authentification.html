@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authentification</title>
     <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/styleAuthentification.css">
 </head>
 
 <body>
@@ -40,12 +41,12 @@
         </div>
     </nav>
 
-    <div class ="contenu">
+    <div class="Authentification">
         <h1>Page d'Authentification</h1>
 
-        <form action="/login" method="post">
-            <label for="username">Nom d'utilisateur :</label>
-            <input type="text" id="username" name="username" required><br><br>
+        <form action="../php/authentification.php" method="post">
+            <label for="identifiant">Nom d'utilisateur :</label>
+            <input type="text" id="identifiant" name="identifiant" required><br><br>
             
             <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="password" required><br><br>
