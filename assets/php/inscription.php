@@ -5,11 +5,12 @@
     $mdp = trim($_POST['mdp'] ?? "");
 
     $sql = "INSERT INTO Entité (Pseudo, mdp) VALUES (:id, :mdp);";
+    echo $sql;
     $stmt = $pdo -> prepare($sql);
 
-    $stmt->execute([
-        ':id' => htmlspecialchars($id),
-        ':mdp' => htmlspecialchars($mdp)
-    ]);
+    $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+    $stmt->bindParam(':mdp', $id, PDO::PARAM_STR);
+
+    $stmt -> execute();
 
 ?>
