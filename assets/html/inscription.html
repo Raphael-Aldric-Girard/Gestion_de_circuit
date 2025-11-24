@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/styleInscription.css">
     <title>Inscription</title>
 </head>
 
@@ -43,32 +44,31 @@
 
     <div class="contenu">
         <h1>Créer un compte</h1>
-        <form action="../php/inscription.php" method="post" id="inscription">
-            <label for="identifiant">identifiant : </label>
-            <input type="text" name="identifiant" id="identifiant" required>
-            <br>
-            <label for="nom">Nom : </label>
-            <input type="text" name="nom" id="nom" required>
-            <br>
-            <label for="prenom">Prénom : </label>
-            <input type="text" name="prenom" id="prenom" required>
-            <br>
-            <label for="age">Age : </label>
-            <input type="number" name="age" id="age" min="18" max="99">
-            <br>
-            <label for="mail">Adresse mail : </label>
-            <input type="email" name="mail" id="mail" required>
-            <br>
-            <label for="mdp">Mot de passe : </label>
-            <input type="password" name="mdp" id="mdp" required>
-            <br>
-            <label for="confirm_mdp">Confirmation du mot de passe</label>
-            <input type="password" name="confirm_mdp" id="confirm_mdp"required>
-            <br>
-            <input type="submit" value="Inscription">
+        <form id="formInscription" action="../php/inscription.php" method="post">
+            <label for="identifiant">Identifiant :</label>
+            <input type="text" id="identifiant" name="identifiant" placeholder="Votre identifiant" required>
+
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+
+            <label for="age">Âge :</label>
+            <input type="number" id="age" name="age" placeholder="Votre âge" required min="18">
+
+            <label for="mail">Adresse mail :</label>
+            <input type="email" id="mail" name="mail" placeholder="votre@email.com" required>
+
+            <label for="mdp">Mot de passe :</label>
+            <input type="password" id="mdp" name="mdp" placeholder="••••••••" required minlength="8">
+
+            <label for="confirm_mdp">Confirmation du mot de passe :</label>
+            <input type="password" id="confirm_mdp" name="confirm_mdp" placeholder="••••••••" required>
+            <button type="submit">S'inscrire</button>
         </form>
     </div>
-    <script src="../js/inscription.js"></script>
+    <!--<script src="../js/inscription.js"></script>-->
 </body>
 
 </html>
