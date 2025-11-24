@@ -3,35 +3,37 @@
     require_once('includes/connexion.php');
     
     try{
-    // preparation de la requete
-        if (!($stmt = $pdo->prepare('Select mdp FROM Entite where Identifiant = :identifiant;'))) 
-            {
-                echo "Echec de la préparation : (" . $pdo->errorCode() . ") " . implode(", ", $pdo->errorInfo());
-            }
+    // vérification des paramètres POST
+        if (!isset($_POST['identifiant']) || !isset($_POST['password'])) {
+            echo "Champs d'authentification manquants";
+            exit;
+        }
 
-        // récupération des paramètres 
+        // préparation de la requête
+        if (!($stmt = $pdo->prepare('SELECT mdp FROM Entite WHERE Identifiant = :identifiant;'))) {
+            echo "Echec de la préparation : (" . $pdo->errorCode() . ") " . implode(", ", $pdo->errorInfo());
+        }
+
+        // récupération des paramètres
         $identifiant = $_POST['identifiant'];
         $mdp = $_POST['password'];
 
-        // liaison des paramètres
-        $stmt->bindParam(':identifiant', $identifiant, PDO::PARAM_INT);
+        // liaison des paramètres (identifiant en chaîne)
+        $stmt->bindParam(':identifiant', $identifiant, PDO::PARAM_STR);
 
-        // execution de la requete
+        // exécution de la requête
         $stmt->execute();
-        
-        echo $identifiant;
-        echo"<br>";
-        echo $mdp;
-        echo"<br>";
-        echo $stmt->fetchColumn();
-        echo"<br>";
+
+        // récupération du mot de passe stocké (une seule lecture)
         $arrColumn = $stmt->fetchColumn();
-        
-        if($mdp === $arrColumn){
-            echo ("Connection reussi");
-        }
-        else{
-            echo ("Echec de la connection");
+
+        if ($arrColumn === false) {
+            echo ("Identifiant introuvable");
+        } elseif ($mdp === $arrColumn) {
+             header('Location: ../html/informationCompte.html');
+             exit;
+        } else {
+            echo ("Échec de la connexion : mot de passe incorrect");
         }
 
     }
