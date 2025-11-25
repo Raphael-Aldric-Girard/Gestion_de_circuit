@@ -15,8 +15,8 @@
         }
 
         // récupération des paramètres
-        $identifiant = $_POST['identifiant'];
-        $mdp_user = $_POST['password'];
+        $identifiant = htmlspecialchars($_POST['identifiant'], ENT_QUOTES, 'UTF-8');
+        $mdp_user = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
 
         // liaison des paramètres (identifiant en chaîne)
         $stmt->bindParam(':identifiant', $identifiant, PDO::PARAM_STR);
@@ -33,8 +33,6 @@
             echo ("Identifiant introuvable");
         } elseif ($mdp_user === $mdp) {
 
-            
-            
             $id = $arrColumn[0][1];
             session_start();
             // creation de cookie de connection
@@ -42,9 +40,7 @@
             $_SESSION['username'] = $id;
             setcookie('user_name', $id, time() + (24 * 60 * 60), '/');
             header('Location: ../html/informationCompte.html');
-            
-            
-            
+        
             exit;
         } else {
             echo ("Échec de la connexion : mot de passe incorrect");
