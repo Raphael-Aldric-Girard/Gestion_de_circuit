@@ -3,6 +3,7 @@
 */
 #bandeau {
     border-radius: 30px;
+    width: 100%;
 }
 
 body {
@@ -31,10 +32,10 @@ p {
 
 #accueil {
     position: relative;
-    margin-right: 1000px;
-    margin-left: 300px;
-    padding-bottom: 7px;
-    margin-top: -79px;
+    margin-right: 73%;
+    margin-left: 17%;
+    padding-bottom: 1em;
+    margin-top: -5%;
 }
 
 #accueil p {
@@ -45,57 +46,58 @@ p {
 
 #information {
     position: relative;
-    margin-right: 525px;
-    margin-left: 825px;
-    padding-top: 1px;
-    margin-top: -72px;
-    padding-bottom: 3px;
+    margin-left: 55%;
+    margin-top: -5%;
+    padding-bottom: 0.5em;
+    width: 8%;
 }
 
 #information p {
-    padding-top: 5px;
-    margin-left: 30px;
+    padding-top: 39px;
+    margin-top: 8%;
+    margin-left: 26px;
 }
 
 #reserver {
     position: relative;
-    margin-right: 345px;
-    margin-left: 1005px;
-    padding-top: 1px;
-    margin-top: -73px;
-    padding-bottom: 5px;
+    margin-left: 64%;
+    margin-top: -5%;
+    width: 7%;
 }
 
 #reserver p {
-    margin-top: 13px;
-    margin-left: 40px;
-    padding-top: 10px;
+    margin-left: 26px;
+    padding-top: 34px;
+    padding-bottom: 33px;
+    margin-top: 4%;
 }
 
 #evenement {
     position: relative;
-    margin-right: 190px;
-    margin-left: 1183px;
-    padding-top: 3px;
-    margin-top: -72px;
-    padding-bottom: 6px;
+    margin-left: 73%;
+    margin-top: -6%;
+    width: 8%;
 }
 
 #evenement p {
     margin-left: 18px;
+    padding-bottom: 33px;
+    margin-top: 16%;
+    padding-top: 22%;
 }
 
 #compte {
     position: relative;
-    margin-right: 60px;
-    margin-left: 1372px;
-    padding-top: 12px;
-    margin-top: -72px;
-    padding-bottom: 5px;
+    margin-left: 85%;
+    margin-top: -6%;
+    width: 5%;
 }
+
 
 #compte img {
     padding-left: 18px;
+    padding-top: 22px;
+    padding-bottom: 16px;
 }
 
 .active_bleu {

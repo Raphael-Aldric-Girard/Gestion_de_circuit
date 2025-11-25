@@ -12,9 +12,14 @@ form {
     color: cornsilk;
 }
 
-.Authentification{
+.Authentification {
     display: grid;
     position: relative;
     align-items: center;
     text-align: center;
+}
+
+#redirect_inscription{
+    text-decoration: none;
+    color: red;
 }
