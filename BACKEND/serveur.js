@@ -1,4 +1,4 @@
-import { getCookie } from '../assets/js/redirectionInfoUser';
+//import { getCookie } from '../assets/js/redirectionInfoUser.js';
 
 const PORT = 3000;
 const express = require('express');
@@ -25,7 +25,7 @@ app.listen(PORT, () => {
     console.log(`Serveur backend opérationnel : http://172.16.194.254:${PORT}`);
 });
 
-app.get('/compte', (req, res) => {
+/*app.get('/compte', (req, res) => {
     let query = 'SELECT E.Mail, E.Nom, C.Prenom, E.Identifiant FROM Client C, Entite E WHERE E.IdEntite = C.IdEntite AND E.IdEntite = ?';
     let idEntite = getCookie('user_name');
 
@@ -38,8 +38,19 @@ app.get('/compte', (req, res) => {
         res.json(results);
 
     });
-});
+});*/
 
-app.get('/vehicule/voiture', (req, res => {
-    let query = 'SELECT '
-}))
+app.get('/vehicule/voiture', (req, res) => {
+    const query = `
+      SELECT IdVehicule, Marque, Modele
+      FROM Vehicule
+      WHERE IdVehicule IN (SELECT IdVehicule FROM Voiture);
+    `;
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Erreur SQL:', err);
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
+        }
+        res.json(results);
+    });
+});
