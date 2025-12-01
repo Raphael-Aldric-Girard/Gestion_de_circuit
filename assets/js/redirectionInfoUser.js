@@ -1,4 +1,7 @@
-
+// Appeler la fonction lors du chargement de la page
+window.onload = function() {
+    checkLoginCookie();  // Vérifie le cookie à chaque fois qu'une page protégée est chargée
+}; 
 function getCookie(name) {
   // Ajoute "=" pour chercher "nomCookie=valeur"
   const nameEQ = name + "=";
@@ -38,8 +41,3 @@ function checkLoginCookie() {
         return false;
     }
 }
-
-// Appeler la fonction lors du chargement de la page
-window.onload = function() {
-    checkLoginCookie();  // Vérifie le cookie à chaque fois qu'une page protégée est chargée
-};
