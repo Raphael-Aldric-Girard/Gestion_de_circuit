@@ -50,4 +50,24 @@ if ($json === FALSE) {
 function getImageByIndex($index, $images) {
     return $images[$index % count($images)];
 }
-?>
+
+// 4. Préparer les données pour JavaScript
+$vehData = [];
+foreach ($voitures as $index => $voiture) {
+    $vehData[] = [
+        'IdVehicule' => $voiture['IdVehicule'] ?? $index,
+        'Marque' => $voiture['Marque'] ?? 'Unknown',
+        'Modele' => $voiture['Modele'] ?? 'Unknown',
+        'image' => getImageByIndex($index, $defaultImages),
+        'status' => 'Disponible'
+    ];
+}
+
+// 5. Retourner JSON pour le client
+header('Content-Type: application/json');
+echo json_encode([
+    'success' => !$erreurApi,
+    'source' => $sourceData,
+    'vehicles' => $vehData
+]);
+?>                                                            

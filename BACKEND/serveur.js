@@ -1,4 +1,5 @@
- const PORT = 3000;
+
+const PORT = 3000;
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
@@ -9,7 +10,7 @@ app.use(express.json());
 
 const connection = mysql.createConnection({
     host: '172.16.194.254',
-    user: ' rGirard',
+    user: 'rGirard',
     password: 'B0Af2rz@jsIFbKXE',
     database: 'SpeedCircuit'
 });
@@ -61,6 +62,7 @@ app.get('/compte', (req, res) => {
 
     });
 });
+
 
 app.get('/vehicule/voiture', (req, res) => {
     const query = `

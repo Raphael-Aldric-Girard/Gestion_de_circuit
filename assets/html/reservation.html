@@ -22,7 +22,7 @@
                 <p>Informations</p>
             </a>
         </div>
-        <div id="reserver">
+        <div id="reserver" class="active_rouge">
             <a href="reservation.html">
                 <p>Reserver</p>
             </a>
@@ -33,8 +33,8 @@
             </a>
         </div>
 
-        <div id="compte" class="active_rouge">
-            <a href="#">
+        <div id="compte">
+            <a href="authentification.html">
                 <img src="../img/logo_compte.png" alt="Compte">
             </a>
         </div>
@@ -70,19 +70,13 @@
                     </label>
                 </div>
 
-                <input type="text" id="selectedCarInput" name="vehicule" class="inputField" placeholder="Cliquez sur une voiture..." readonly>
+                <input type="text" id="selectedCar" name="vehicule" class="inputField" placeholder="Cliquez sur une voiture..." readonly>
                 
                 <button type="submit" class="submitButton">Réserver</button>
             </form>
         </div>
 
     </main>
-    <script src = "../php/reservation.php"></script>
-    <script>
-        function selectionnerVoiture(id, marque, modele) {
-            document.getElementById('selectedCarDisplay').value = `${marque} ${modele}`;
-            document.getElementById('selectedCarId').value = id;
-        }
-    </script>
+    <script src="../js/reservation.js"></script>
 </body>
 </html>
