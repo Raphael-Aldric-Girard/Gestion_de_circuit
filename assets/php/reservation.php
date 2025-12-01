@@ -29,7 +29,7 @@ if ($json === FALSE) {
     $erreurApi = true;
     $sourceData = "Mode Démo (Erreur API)";
     
-    // Données de secours (Mock Data)
+    // Données de secours 
     $voitures = [
         ['IdVehicule' => 1, 'Marque' => 'Audi', 'Modele' => 'R8 V10 (Démo)'],
         ['IdVehicule' => 2, 'Marque' => 'Porsche', 'Modele' => '911 GT3 (Démo)'],
