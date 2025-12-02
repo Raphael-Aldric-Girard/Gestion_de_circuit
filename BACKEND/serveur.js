@@ -75,8 +75,8 @@ app.get('/reservation', (req, res) => {
         return res.status(401).json({ message: 'Non authentifié - cookie user_name manquant' });
     }
 
-    let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C, Reservation R, Session S, Vehicule V WHERE C.IdClient = R.IdClient  AND R.IdSession = S.IdSession AND R.IdVehicule = V.IdVehicule AND C.IdEntite = ? AND AND S.DateSession > NOW();';
-
+    let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C INNER JOIN Reservation R ON C.IdClient = R.IdClient INNER JOIN Session S ON R.IdSession = S.IdSession INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule WHERE C.IdEntite = ? AND S.DateSession > NOW();'
+    
     connection.query(query, [idEntite], (err, results) => {
         if (err) {
             console.error('Erreur SQL:', err);
@@ -99,7 +99,8 @@ app.get('/reservation/past', (req, res) => {
     let idEntite = cookie.user_name;
     console.log(`idEntite : ${idEntite}`);
 
-    let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C, Reservation R, Session S, Vehicule V WHERE C.IdClient = R.IdClient  AND R.IdSession = S.IdSession AND R.IdVehicule = V.IdVehicule AND C.IdEntite = ? AND AND S.DateSession < NOW();';
+    let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C INNER JOIN Reservation R ON C.IdClient = R.IdClient INNER JOIN Session S ON R.IdSession = S.IdSession INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule WHERE C.IdEntite = ? AND S.DateSession < NOW();'
+    
     connection.query(query, [idEntite], (err, results) => {
         if (err) {
             console.error('Erreur SQL : ', err);
