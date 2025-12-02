@@ -2,7 +2,7 @@
 // --- LOGIQUE MÉTIER (BACKEND) ---
 
 // Configuration
-$apiUrl = 'http://172.16.194.254:3000/vehicule/voiture';
+$apiUrl = 'http://172.16.194.254:5000/vehicule/voiture';
 
 // Images par défaut pour l'affichage
 $defaultImages = [

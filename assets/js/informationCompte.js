@@ -1,4 +1,4 @@
-fetch('http://172.16.195.254:5000/compte', {
+fetch('http://172.16.194.254:5000/compte', {
     credentials: 'include'  // ← IMPORTANT !
 })
     .then(

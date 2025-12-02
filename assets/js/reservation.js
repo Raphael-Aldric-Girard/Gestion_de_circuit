@@ -3,7 +3,7 @@
  */
 
 // Configuration
-const API_URL = 'http://172.16.194.254:3000/vehicule/voiture'; // API Node backend
+const API_URL = 'http://172.16.194.254:5000/vehicule/voiture'; // API Node backend
 const FALLBACK_API_URL = '../php/reservation.php'; // API PHP fallback
 
 let selectedCarId = null;
