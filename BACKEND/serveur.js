@@ -120,38 +120,6 @@ app.get('/vehicule', (req, res) => {
     });
 });
 
-// Route Get Voiture
-app.get('/vehicule/voiture', (req, res) => {
-    const query = `
-      SELECT IdVehicule, Marque, Modele
-      FROM Vehicule
-      WHERE IdVehicule IN (SELECT IdVehicule FROM Voiture);
-    `;
-    connection.query(query, (err, results) => {
-        if (err) {
-            console.error('Erreur SQL:', err);
-            return res.status(500).json({ message: 'Erreur interne au serveur' });
-        }
-        res.json(results);
-    });
-});
-
-// Route Get Moto
-app.get('/vehicule/moto', (req, res) => {
-    const query = `
-      SELECT IdVehicule, Marque, Modele
-      FROM Vehicule
-      WHERE IdVehicule IN (SELECT IdVehicule FROM Moto);
-    `;
-    connection.query(query, (err, results) => {
-        if (err) {
-            console.error('Erreur SQL:', err);
-            return res.status(500).json({ message: 'Erreur interne au serveur' });
-        }
-        res.json(results);
-    });
-});
-
 app.get('/evenement', (req, res) => {
     const query =
         'SELECT LibelleEvenement, DateEvenement, Prix FROM Evenement;'

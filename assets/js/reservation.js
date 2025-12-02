@@ -3,7 +3,7 @@
  */
 
 // Configuration
-const API_URL = 'http://172.16.194.254:5000/vehicule/voiture'; // API Node backend
+const API_URL = 'http://172.16.194.254:5000/vehicule/'; // API Node backend
 const FALLBACK_API_URL = '../php/reservation.php'; // API PHP fallback
 
 let selectedCarId = null;
@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
  * Charge les véhicules depuis l'API
  */
 async function loadVehicles() {
-    const grilleVoitures = document.getElementById('grilleVoitures');
-    const compteur = document.getElementById('compteurVoitures');
+    const grilleVehicules = document.getElementById('grilleVehicules');
+    const compteur = document.getElementById('compteurVehicules');
     
     try {
         // Essayer d'abord l'API Node
@@ -45,7 +45,7 @@ async function loadVehicles() {
         
     } catch (error) {
         console.error('Erreur lors du chargement des véhicules:', error);
-        grilleVoitures.innerHTML = `<p style="color: red; grid-column: 1/-1;">Erreur de chargement. Veuillez rafraîchir la page.</p>`;
+        grilleVehicules.innerHTML = `<p style="color: red; grid-column: 1/-1;">Erreur de chargement. Veuillez rafraîchir la page.</p>`;
         compteur.textContent = '0 voiture';
     }
 }
@@ -54,18 +54,18 @@ async function loadVehicles() {
  * Affiche les véhicules dans la grille
  */
 function displayVehicles(vehicles) {
-    const grilleVoitures = document.getElementById('grilleVoitures');
-    grilleVoitures.innerHTML = ''; // Effacer le contenu précédent
+    const grilleVehicules = document.getElementById('grilleVehicules');
+    grilleVehicules.innerHTML = ''; // Effacer le contenu précédent
     
     if (vehicles.length === 0) {
-        grilleVoitures.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">Aucune voiture disponible</p>';
+        grilleVehicules.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">Aucune voiture disponible</p>';
         return;
     }
     
     // Générer les cartes de véhicules
     vehicles.forEach((vehicle, index) => {
         const card = createCarCard(vehicle, index);
-        grilleVoitures.appendChild(card);
+        grilleVehicules.appendChild(card);
     });
 }
 
