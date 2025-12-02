@@ -82,10 +82,8 @@ app.get('/reservation', (req, res) => {
             console.error('Erreur SQL:', err);
             return res.status(500).json({ message: 'Erreur interne au serveur' });
         }
-
         console.log(results);
         res.json(results);
-
     });
 });
 
@@ -103,10 +101,8 @@ app.get('/reservation/past', (req, res) => {
             console.error('Erreur SQL : ', err);
             return res.status(500).json({ message: 'Erreur interne au serveur' });
         }
-       
         console.log(results);
         res.json(results);
-        
     });
 });
 
