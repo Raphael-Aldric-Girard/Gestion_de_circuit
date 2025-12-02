@@ -1,4 +1,3 @@
-
 const PORT = 5000;
 const express = require('express');
 const mysql = require('mysql');
@@ -9,65 +8,61 @@ app.use(express.json());
 
 // Ou utilisez le package cors
 app.use(cors({
-  origin: 'http://172.16.195.254', // L'origine de votre page
-  credentials: true  // ← IMPORTANT !
+    origin: 'http://172.16.194.254', // L'origine de votre page
+    credentials: true  // ← IMPORTANT !
 }));
 
 const connection = mysql.createPool({
-  host: '127.0.0.1',
-  user: 'circuit',
-  password: 'VQ2kbJaHf0PmItial7SZ',
-  database: 'SpeedCircuit'
+    host: '127.0.0.1',
+    user: 'circuit',
+    password: 'VQ2kbJaHf0PmItial7SZ',
+    database: 'SpeedCircuit'
+
 });
 
-connection.connect(err=>{
-    if (err) console.log(err);
-    console.log('Connecté à la base mysql');
-});
+function parseCookies(cookieHeader) {
+    const cookies = {};
+    if (cookieHeader) {
+        cookieHeader.split(';').forEach(cookie => {
+            const parts = cookie.trim().split('=');
+            if (parts.length === 2) {  // Vérification ajoutée
+                cookies[parts[0]] = parts[1];
+            }
+        });
+    }
+    return cookies;
+}
 
 app.listen(PORT, () => {
     console.log(`Serveur backend opérationnel : http://172.16.194.254:${PORT}`);
 });
 
-function getCookie(name) {
-  // Ajoute "=" pour chercher "nomCookie=valeur"
-  const nameEQ = name + "=";
-  
-  // Sépare tous les cookies (séparés par "; ")
-  const cookies = document.cookie.split(';');
-  
-  for (let i = 0; i < cookies.length; i++) {
-    let cookie = cookies[i];
-    
-    // Supprime les espaces au début
-    while (cookie.charAt(0) === ' ') {
-      cookie = cookie.substring(1);
-    }
-    
-    // Si le cookie correspond, retourne sa valeur
-    if (cookie.indexOf(nameEQ) === 0) {
-      return cookie.substring(nameEQ.length);
-    }
-  }
-  
-  return null; // Cookie non trouvé
-}
-
 app.get('/compte', (req, res) => {
+    console.log('Route /compte appelée');
+    console.log('Headers cookie:', req.headers.cookie); // Voir tous les cookies
+
+    const cookies = parseCookies(req.headers.cookie);
+    console.log('Cookies parsés:', cookies); // Voir le résultat du parsing
+    console.log('Noms des cookies disponibles:', Object.keys(cookies));
+
+    let idEntite = cookies.user_name;
+    console.log(`idEntite : ${idEntite}`);
+
+    // Vérifiez si idEntite existe
+    if (!idEntite) {
+        return res.status(401).json({ message: 'Non authentifié - cookie user_name manquant' });
+    }
     let query = 'SELECT E.Mail, E.Nom, C.Prenom, E.Identifiant FROM Client C, Entite E WHERE E.IdEntite = C.IdEntite AND E.IdEntite = ?';
-    let idEntite = getCookie('user_name');
 
     connection.query(query, [idEntite], (err, results) => {
         if (err) {
             console.error('Erreur SQL:', err);
-            return res.status(500).json({ message : 'Erreur interne au serveur' });
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
         }
-
+        console.log(results);
         res.json(results);
-
     });
 });
-
 
 app.get('/vehicule/voiture', (req, res) => {
     const query = `
@@ -83,3 +78,4 @@ app.get('/vehicule/voiture', (req, res) => {
         res.json(results);
     });
 });
+
