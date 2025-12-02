@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/base.css">
-    
+    <link rel="stylesheet" href="../css/styleInformationsCompte">
+
     <title>Document</title>
 </head>
 
@@ -29,7 +30,7 @@
                 <p>Reserver</p>
             </a>
         </div>
-        <div id="evenement" >
+        <div id="evenement">
             <a href="">
                 <p>Evenements</p>
             </a>
@@ -44,36 +45,42 @@
 
     <div id="contenu">
         <h1>Voici les informations de votre compte</h1>
-        <h2>Votre compte</h2>
-        <table>
-            <thead>
-                <td>mail</td>
-                <td>nom</td>
-                <td>prenom</td>
-                <td>identifiant</td>
-            </thead>
-            <tbody id="informationCompte"></tbody>
-        </table>
+        <div id="compte">
+            <h2>Votre compte</h2>
+            <table>
+                <thead>
+                    <td>mail</td>
+                    <td>nom</td>
+                    <td>prenom</td>
+                    <td>identifiant</td>
+                </thead>
+                <tbody id="informationCompte"></tbody>
+            </table>
+        </div>
 
-        <h2>Reservations en cours</h2>
-        <table>
-            <thead>
-                <td>Date et heure</td>
-                <td>Marque du véhicule</td>
-                <td>Modèle du vehicule</td>
-            </thead>
-            <tbody id="informationReservation"></tbody>
-        </table>
+        <div id="reservation">
+            <h2>Reservations en cours</h2>
+            <table>
+                <thead>
+                    <td>Date et heure</td>
+                    <td>Marque du véhicule</td>
+                    <td>Modèle du vehicule</td>
+                </thead>
+                <tbody id="informationReservation"></tbody>
+            </table>
+        </div>
 
-        <h2>Historique des reservations</h2>
-        <table>
-            <thead>
-                <td>Date et Heure</td>
-                <td>Marqque du véhicule</td>
-                <td>Modèle du véhicule</td>
-            </thead>
-            <tbody id="informationReservationPast"></tbody>
-        </table>
+        <div id="reservationPast">
+            <h2>Historique des reservations</h2>
+            <table>
+                <thead>
+                    <td>Date et Heure</td>
+                    <td>Marque du véhicule</td>
+                    <td>Modèle du véhicule</td>
+                </thead>
+                <tbody id="informationReservationPast"></tbody>
+            </table>
+        </div>
     </div>
     <script src="../js/informationCompte.js"></script>
     <script src="../js/informationReservation.js"></script>
