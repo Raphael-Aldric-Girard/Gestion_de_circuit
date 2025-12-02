@@ -7,6 +7,7 @@ fetch('http://172.16.194.254:5000/reservation', {
                 reponse.json()
                     .then(
                         function (datas) {
+                            console.log(datas);
                             let informationReservation = document.getElementById('informationReservation');
                             datas.forEach(
                                 function (data) {
