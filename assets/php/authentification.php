@@ -44,6 +44,7 @@
             exit;
         } else {
             echo ("Échec de la connexion : mot de passe incorrect");
+            header('Location: ../html/erreurIdMdp.html');
         }
 
     }
