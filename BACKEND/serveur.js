@@ -87,6 +87,20 @@ app.get('/reservation', (req,res) => {
     });
 });
 
+app.get('/vehicule', (req, res) => {
+    const query = `
+      SELECT IdVehicule, Marque, Modele
+      FROM Vehicule;
+    `;
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Erreur SQL:', err);
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
+        }
+        res.json(results);
+    });
+});
+
 // Route Get Voiture
 app.get('/vehicule/voiture', (req, res) => {
     const query = `
