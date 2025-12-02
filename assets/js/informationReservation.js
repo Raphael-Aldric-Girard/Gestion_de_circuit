@@ -7,9 +7,8 @@ fetch('http://172.16.194.254:5000/reservation', {
                 reponse.json()
                     .then(
                         function (datas) {
-                            console.log(datas);
                             let informationReservation = document.getElementById('informationReservation');
-                            if (datas.length === 0 ){
+                            if (datas.length === 0) {
                                 let ligne = document.createElement('tr');
                                 ligne.textContent = "Vous n'avez aucune reservations a venir pour ce moment.";
                                 informationReservation.appendChild(ligne);

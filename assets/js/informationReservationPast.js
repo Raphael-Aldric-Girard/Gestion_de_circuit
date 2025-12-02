@@ -8,9 +8,8 @@ fetch('http://172.16.194.254:5000/reservation/past', {
                     .then(
                         function (datas) {
                             let informationReservationPast = document.getElementById('informationReservationPast');
-                            console.log(datas);
-                            if (datas.length === 0 ) {
-                                let ligne  = document.createElement('tr');
+                            if (datas.length === 0) {
+                                let ligne = document.createElement('tr');
                                 ligne.textContent = "Aucune reservation enregistrées dans l'historique";
                                 informationReservationPast.appendChild(ligne);
                             }
