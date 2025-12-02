@@ -64,6 +64,29 @@ app.get('/compte', (req, res) => {
     });
 });
 
+app.get('/reservation', (req,res) => {
+    console.log('Route /reservation appelée');
+    const cookie = parseCookies(req.headers.cookie);
+
+    let idEntite = cookie.user_name;
+    console.log(`idEntite : ${idEntite}`);
+
+    if(!idEntite) {
+        return res.status(401).json({ message : 'Non authentifié - cookie user_name manquant' });
+    }
+
+    let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C, Reservation R, Session S, Vehicule V WHERE C.IdClient = R.IdClient  AND R.IdSession = S.IdSession AND R.IdVehicule = V.IdVehicule AND C.IdEntite = ?';
+
+    connection.query(query, [idEntite], (err, results) => {
+        if (err) {
+            console.error('Erreur SQL:', err);
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
+        }
+        console.log(results);
+        res.json(results);
+    });
+});
+
 app.get('/vehicule/voiture', (req, res) => {
     const query = `
       SELECT IdVehicule, Marque, Modele
