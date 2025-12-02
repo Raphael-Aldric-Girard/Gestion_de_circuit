@@ -64,26 +64,54 @@ app.get('/compte', (req, res) => {
     });
 });
 
-app.get('/reservation', (req,res) => {
+app.get('/reservation', (req, res) => {
     console.log('Route /reservation appelée');
     const cookie = parseCookies(req.headers.cookie);
 
     let idEntite = cookie.user_name;
     console.log(`idEntite : ${idEntite}`);
 
-    if(!idEntite) {
-        return res.status(401).json({ message : 'Non authentifié - cookie user_name manquant' });
+    if (!idEntite) {
+        return res.status(401).json({ message: 'Non authentifié - cookie user_name manquant' });
     }
 
-    let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C, Reservation R, Session S, Vehicule V WHERE C.IdClient = R.IdClient  AND R.IdSession = S.IdSession AND R.IdVehicule = V.IdVehicule AND C.IdEntite = ?';
+    let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C, Reservation R, Session S, Vehicule V WHERE C.IdClient = R.IdClient  AND R.IdSession = S.IdSession AND R.IdVehicule = V.IdVehicule AND C.IdEntite = ? AND AND S.DateSession > NOW();';
 
     connection.query(query, [idEntite], (err, results) => {
         if (err) {
             console.error('Erreur SQL:', err);
             return res.status(500).json({ message: 'Erreur interne au serveur' });
         }
-        console.log(results);
-        res.json(results);
+        if (results) {
+            console.log(results);
+            res.json(results);
+        } else {
+            results = "Vous n'avez aucune reservations a venir pour ce moment";
+            res.json(results);
+        }
+    });
+});
+
+app.get('/reservation/past', (req, res) => {
+    console.log('Route /reservation/past appelée');
+    const cookie = parseCookies(req.headers.cookie);
+
+    let idEntite = cookie.user_name;
+    console.log(`idEntite : ${idEntite}`);
+
+    let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C, Reservation R, Session S, Vehicule V WHERE C.IdClient = R.IdClient  AND R.IdSession = S.IdSession AND R.IdVehicule = V.IdVehicule AND C.IdEntite = ? AND AND S.DateSession < NOW();';
+    connection.query(query, [idEntite], (err, results) => {
+        if (err) {
+            console.error('Erreur SQL : ', err);
+            return res.status(500).json({ message : 'Erreur interne au serveur' });
+        }
+        if (results) {
+            console.log(results);
+            res.json(results);
+        } else {
+            results = "Vous n'avez aucune reservation dans l'historique";
+            res.json(results);
+        }
     });
 });
 
@@ -134,9 +162,9 @@ app.get('/vehicule/moto', (req, res) => {
 });
 
 app.get('/evenement', (req, res) => {
-    const query = 
-      'SELECT LibelleEvenement, DateEvenement, Prix FROM Evenement;'
-    ;
+    const query =
+        'SELECT LibelleEvenement, DateEvenement, Prix FROM Evenement;'
+        ;
     connection.query(query, (err, results) => {
         if (err) {
             console.error('Erreur SQL:', err);
