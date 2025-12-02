@@ -1,18 +1,23 @@
 
-const PORT = 3000;
+const PORT = 5000;
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
 const cors = require('cors');
 
-app.use(cors());
 app.use(express.json());
 
-const connection = mysql.createConnection({
-    host: '172.16.194.254',
-    user: 'rGirard',
-    password: 'B0Af2rz@jsIFbKXE',
-    database: 'SpeedCircuit'
+// Ou utilisez le package cors
+app.use(cors({
+  origin: 'http://172.16.195.254', // L'origine de votre page
+  credentials: true  // ← IMPORTANT !
+}));
+
+const connection = mysql.createPool({
+  host: '127.0.0.1',
+  user: 'circuit',
+  password: 'VQ2kbJaHf0PmItial7SZ',
+  database: 'SpeedCircuit'
 });
 
 connection.connect(err=>{
