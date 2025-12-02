@@ -76,19 +76,16 @@ app.get('/reservation', (req, res) => {
     }
 
     let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C INNER JOIN Reservation R ON C.IdClient = R.IdClient INNER JOIN Session S ON R.IdSession = S.IdSession INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule WHERE C.IdEntite = ? AND S.DateSession > NOW();'
-    
+
     connection.query(query, [idEntite], (err, results) => {
         if (err) {
             console.error('Erreur SQL:', err);
             return res.status(500).json({ message: 'Erreur interne au serveur' });
         }
-        if (results) {
-            console.log(results);
-            res.json(results);
-        } else {
-            results = "Vous n'avez aucune reservations a venir pour ce moment";
-            res.json(results);
-        }
+
+        console.log(results);
+        res.json(results);
+
     });
 });
 
@@ -100,19 +97,16 @@ app.get('/reservation/past', (req, res) => {
     console.log(`idEntite : ${idEntite}`);
 
     let query = 'SELECT S.DateSession, V.Marque, V.Modele FROM Client C INNER JOIN Reservation R ON C.IdClient = R.IdClient INNER JOIN Session S ON R.IdSession = S.IdSession INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule WHERE C.IdEntite = ? AND S.DateSession < NOW();'
-    
+
     connection.query(query, [idEntite], (err, results) => {
         if (err) {
             console.error('Erreur SQL : ', err);
-            return res.status(500).json({ message : 'Erreur interne au serveur' });
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
         }
-        if (results) {
-            console.log(results);
-            res.json(results);
-        } else {
-            results = "Vous n'avez aucune reservation dans l'historique";
-            res.json(results);
-        }
+       
+        console.log(results);
+        res.json(results);
+        
     });
 });
 
