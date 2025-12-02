@@ -77,20 +77,9 @@ function createCarCard(vehicle, index) {
     card.className = 'carCard';
     card.style.cursor = 'pointer';
     
-    // Image par défaut si l'API Node est utilisée (elle ne retourne pas d'images)
-    const defaultImages = [
-        'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=400',
-        'https://images.unsplash.com/photo-1580273916550-e323be2ed5d6?q=80&w=400',
-        'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=400',
-        'https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=400',
-        'https://images.unsplash.com/photo-1503376763036-066120622c74?q=80&w=400',
-        'https://images.unsplash.com/photo-1600712242805-5f78671b24da?q=80&w=400'
-    ];
-    const image = vehicle.image || defaultImages[index % defaultImages.length];
-    
     card.innerHTML = `
         <div class="carImageWrapper">
-            <img src="${image}" alt="${vehicle.Marque} ${vehicle.Modele}" class="carImage">
+            <img src="../img/Vehicule/${vehicle.IdVehicule}.png" alt="${vehicle.Marque} ${vehicle.Modele}" class="carImage">
         </div>
         <div class="carDetails">
             <div class="carName">${vehicle.Marque} ${vehicle.Modele}</div>

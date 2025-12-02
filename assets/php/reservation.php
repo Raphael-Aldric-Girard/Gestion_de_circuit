@@ -37,11 +37,6 @@ if ($json === FALSE) {
     }
 }
 
-// 3. Fonctions utilitaires pour la Vue
-function getImageByIndex($index, $images) {
-    return $images[$index % count($images)];
-}
-
 // 4. Préparer les données pour JavaScript
 $vehData = [];
 foreach ($voitures as $index => $voiture) {
