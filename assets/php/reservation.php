@@ -2,7 +2,8 @@
 // --- LOGIQUE MÉTIER (BACKEND) ---
 
 // Configuration
-$apiUrl = 'http://172.16.194.254:5000/vehicule/voiture';
+
+$apiUrl = 'http://172.16.194.254:5000/vehicule/';
 
 // Images par défaut pour l'affichage
 $defaultImages = [
@@ -13,6 +14,17 @@ $defaultImages = [
     'https://images.unsplash.com/photo-1503376763036-066120622c74?q=80&w=400',
     'https://images.unsplash.com/photo-1600712242805-5f78671b24da?q=80&w=400'
 ];
+
+$typeVehicule = $_GET['type'] ?? $_POST['type'] ?? 'voiture';
+
+// 2. Validation et sécurisation du type
+$typesValides = ['moto', 'voiture'];
+if (!in_array(strtolower($typeVehicule), $typesValides)) {
+    $typeVehicule = 'voiture'; // Valeur par défaut
+}
+
+// 3. Construction de l'URL API dynamique
+$apiUrl = $baseApiUrl . strtolower($typeVehicule);
 
 // Initialisation des variables
 $voitures = [];
