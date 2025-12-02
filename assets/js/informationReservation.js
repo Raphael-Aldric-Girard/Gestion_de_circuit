@@ -20,5 +20,23 @@ fetch('http://172.16.194.254:5000/reservation', {
     );
 
 function reservation(dataUser) {
-    let 
+    let date = dataUser.DateSession;
+    let marque = dataUser.Marque;
+    let modele = dataUser.Modele;
+
+    let ligne = document.createElement('tr');
+
+    let colDate = document.createElement('td');
+    let colMarque = document.createElement('td');
+    let colModele = document.createElement('td');
+
+    colDate.textContent = date;
+    colMarque.textContent = marque;
+    colModele.textContent = modele;
+
+    ligne.appendChild(colDate);
+    ligne.appendChild(colMarque);
+    ligne.appendChild(colModele);
+
+    return ligne;
 }
