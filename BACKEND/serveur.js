@@ -132,3 +132,41 @@ app.get('/evenement', (req, res) => {
         res.json(results);
     });
 });
+
+app.post('/login', (req, res) => {
+    const { identifiant, mdp } = req.body;
+
+    if (!identifiant || !mdp) {
+        return res.status(400).json({ message: 'Identifiant et mot de passe requis.' });
+    }
+
+    // Une seule requête avec JOIN au lieu de 3
+    const query = `
+        SELECT e.IdEntite, p.prenom, p.IdPoste 
+        FROM Entite e
+        LEFT JOIN Personnel p ON e.IdEntite = p.IdEntite
+        WHERE e.Identifiant = ? AND e.mdp = ?
+    `;
+    
+    connection.query(query, [identifiant, mdp], (err, results) => {
+        if (err) {
+            console.error('Erreur SQL :', err);
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
+        }
+
+        if (results.length === 0) {
+            return res.status(401).json({ message: 'Identifiant ou mot de passe incorrect' });
+        }
+
+        if (!results[0].prenom) {
+            return res.status(401).json({ message: 'Vous n\'avez pas de compte pour accéder à cette application' });
+        }
+
+        res.json({ 
+            user: { 
+                prenom: results[0].prenom, 
+                Poste: results[0].IdPoste 
+            }
+        });
+    });
+});
