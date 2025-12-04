@@ -3,13 +3,13 @@
     require_once('includes/connexion.php');
 
     // Récupération des variables nécessaires
-    $id = $_POST['identifiant'];
-    $nom = $_POST['nom'];
-    $mdp = $_POST['mdp'];
-    $mail = $_POST['mail'];
-    $confirmMdp = $_POST['confirm_mdp'];
-    $prenom = $_POST['prenom'];
-    $age = $_POST['age'];
+    $id = htmlspecialchars($_POST['identifiant']);
+    $nom = htmlspecialchars($_POST['nom']);
+    $mdp = htmlspecialchars($_POST['mdp']);
+    $mail = htmlspecialchars($_POST['mail']);
+    $confirmMdp = htmlspecialchars($_POST['confirm_mdp']);
+    $prenom = htmlspecialchars($_POST['prenom']);
+    $age = htmlspecialchars($_POST['age']);
 
     
     // Vérification si le mot de passe de confirmation correspond au mot de passe
