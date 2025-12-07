@@ -14,8 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const connection = mysql.createPool({
     host: '127.0.0.1',
-    user: 'circuit',
-    password: 'VQ2kbJaHf0PmItial7SZ',
+    user: 'rGirard',
+    password: 'B0Af2rz@jsIFbKXE',
     database: 'SpeedCircuit'
 
 });
