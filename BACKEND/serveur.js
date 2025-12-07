@@ -4,18 +4,18 @@ const mysql = require('mysql');
 const app = express();
 const cors = require('cors');
 
-app.use(express.json());
-
-// Ou utilisez le package cors
 app.use(cors({
-    origin: 'http://172.16.194.254', // L'origine de votre page
-    credentials: true  // ← IMPORTANT !
+    origin: '*', // En production, spécifiez l'origine exacte
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const connection = mysql.createPool({
     host: '127.0.0.1',
-    user: 'rGirard',
-    password: 'B0Af2rz@jsIFbKXE',
+    user: 'circuit',
+    password: 'VQ2kbJaHf0PmItial7SZ',
     database: 'SpeedCircuit'
 
 });
@@ -134,25 +134,34 @@ app.get('/evenement', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
+    console.log('Route /login appelée');
     const { identifiant, mdp } = req.body;
 
     if (!identifiant || !mdp) {
         return res.status(400).json({ message: 'Identifiant et mot de passe requis.' });
     }
 
-    // Une seule requête avec JOIN au lieu de 3
+    // Utilisation d'alias pour garantir la casse
     const query = `
-        SELECT e.IdEntite, p.prenom, p.IdPoste 
+        SELECT 
+            e.IdEntite, 
+            p.Prenom as prenom, 
+            p.IdPoste as idPoste
         FROM Entite e
         LEFT JOIN Personnel p ON e.IdEntite = p.IdEntite
         WHERE e.Identifiant = ? AND e.mdp = ?
     `;
     
+    console.log('Identifiant:', identifiant);
+    console.log('Mot de passe:', mdp);
+
     connection.query(query, [identifiant, mdp], (err, results) => {
         if (err) {
             console.error('Erreur SQL :', err);
             return res.status(500).json({ message: 'Erreur interne au serveur' });
         }
+
+        console.log('Résultats de la requête:', results); // Debug important
 
         if (results.length === 0) {
             return res.status(401).json({ message: 'Identifiant ou mot de passe incorrect' });
@@ -162,10 +171,10 @@ app.post('/login', (req, res) => {
             return res.status(401).json({ message: 'Vous n\'avez pas de compte pour accéder à cette application' });
         }
 
-        res.json({ 
-            user: { 
-                prenom: results[0].prenom, 
-                Poste: results[0].IdPoste 
+        res.json({
+            user: {
+                prenom: results[0].Prenom,
+                Poste: results[0].idPoste
             }
         });
     });
