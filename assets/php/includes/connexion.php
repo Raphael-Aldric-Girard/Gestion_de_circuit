@@ -1,20 +1,14 @@
 <?php
-    try {
-        // chaine de connexion à la base de données
-        $dsn='mysql:host=localhost;dbname=SpeedCircuit';
-
-        // option de connexion encodage UTF8 pour MySQL
-        $options = [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"];
-
-        // création d'une instance de connexion à la base de données et ouverture de la connexion
-        $pdo = new PDO($dsn, 'rGirard', 'B0Af2rz@jsIFbKXE', $options);
-        
-        // choix de la méthode d'information en cas d'erreur levée d'exception
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //echo 'connexion effectuée avec le driver ' . $pdo->getAttribute(PDO::ATTR_DRIVER_NAME) . '<br>';
-    }
-        catch (PDOException $e) {
-        $msg = 'ERREUR PDO dans ' . $e->getFile() . ' : ' . $e->getLine() . ' : ' . $e->getMessage();
-        die($msg);
-    }
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=SpeedCircuit;charset=utf8mb4', 'rGirard', 'B0Af2rz@jsIFbKXE');
+    
+    // 🔒 CONFIGURATION SÉCURISÉE OBLIGATOIRE
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); // Vraies requêtes préparées
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Exceptions
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    
+} catch(PDOException $e) {
+    error_log("Erreur connexion : " . $e->getMessage());
+    die("Erreur de connexion à la base de données");
+}
 ?>
