@@ -6,7 +6,7 @@ const app = express();
 const cors = require('cors');
 
 app.use(cors({
-    origin: 'http://172.16.194.254', // En production, spécifiez l'origine exacte
+    origin: true, // En production, spécifiez l'origine exacte
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
