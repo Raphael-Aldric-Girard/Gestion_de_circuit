@@ -1,3 +1,4 @@
+// 
 const PORT = 5000;
 const express = require('express');
 const mysql = require('mysql');
@@ -5,8 +6,8 @@ const app = express();
 const cors = require('cors');
 
 app.use(cors({
-    origin: '*', // En production, spécifiez l'origine exacte
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: '172.16.194.254', // En production, spécifiez l'origine exacte
+    methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
@@ -36,6 +37,11 @@ function parseCookies(cookieHeader) {
 app.listen(PORT, () => {
     console.log(`Serveur backend opérationnel : http://172.16.194.254:${PORT}`);
 });
+
+/**
+ * Route qui permets de récupérer les informations de l'utilisateur sur l'application légère 
+ * en récupérant sont cookie de connexion.
+ */
 
 app.get('/compte', (req, res) => {
     console.log('Route /compte appelée');
