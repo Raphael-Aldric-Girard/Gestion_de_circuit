@@ -80,6 +80,12 @@
         // Validation de la transaction
         $pdo->commit();
 
+         session_start();
+            // creation de cookie de connection
+            $_SESSION['logged_in'] = true;
+            $_SESSION['username'] = $idEntite;
+            setcookie('user_name', $idEntite, time() + (24 * 60 * 60), '/');
+
         header('Location: ../html/informationCompte.html');
         exit(); 
 
