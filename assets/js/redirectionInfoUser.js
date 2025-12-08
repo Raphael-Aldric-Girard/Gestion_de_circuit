@@ -41,3 +41,5 @@ function checkLoginCookie() {
         return false;
     }
 }
+
+module.exports = { getCookie };
