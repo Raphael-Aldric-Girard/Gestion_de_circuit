@@ -114,6 +114,7 @@ app.get('/reservation/past', (req, res) => {
 });
 
 app.get('/vehicule', (req, res) => {
+    console.log('Route /vehicule appellée');
     const query = `
       SELECT IdVehicule, Marque, Modele
       FROM Vehicule;
@@ -123,6 +124,7 @@ app.get('/vehicule', (req, res) => {
             console.error('Erreur SQL:', err);
             return res.status(500).json({ message: 'Erreur interne au serveur' });
         }
+        console.log(results);
         res.json(results);
     });
 });
