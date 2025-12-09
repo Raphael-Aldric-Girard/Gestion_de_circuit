@@ -45,42 +45,48 @@
 
     <div id="contenu">
         <h1>Voici les informations de votre compte</h1>
-        <div id="user">
-            <h2>Votre compte</h2>
-            <table>
-                <thead>
-                    <td>mail</td>
-                    <td>nom</td>
-                    <td>prenom</td>
-                    <td>identifiant</td>
-                </thead>
-                <tbody id="informationCompte"></tbody>
-            </table>
+
+        <div class="container">
+            <div id="user">
+                <h2>Votre compte</h2>
+                <table>
+                    <thead>
+                        <td>mail</td>
+                        <td>nom</td>
+                        <td>prenom</td>
+                        <td>identifiant</td>
+                    </thead>
+                    <tbody id="informationCompte"></tbody>
+                </table>
+            </div>
+
+            <div class="right-column">
+                <div id="reservation">
+                    <h2>Reservations en cours</h2>
+                    <table>
+                        <thead>
+                            <td>Date et heure</td>
+                            <td>Marque du véhicule</td>
+                            <td>Modèle du vehicule</td>
+                        </thead>
+                        <tbody id="informationReservation"></tbody>
+                    </table>
+                </div>
+
+                <div id="reservationPast">
+                    <h2>Historique des reservations</h2>
+                    <table>
+                        <thead>
+                            <td>Date et Heure</td>
+                            <td>Marque du véhicule</td>
+                            <td>Modèle du véhicule</td>
+                        </thead>
+                        <tbody id="informationReservationPast"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <div id="reservation">
-            <h2>Reservations en cours</h2>
-            <table>
-                <thead>
-                    <td>Date et heure</td>
-                    <td>Marque du véhicule</td>
-                    <td>Modèle du vehicule</td>
-                </thead>
-                <tbody id="informationReservation"></tbody>
-            </table>
-        </div>
-
-        <div id="reservationPast">
-            <h2>Historique des reservations</h2>
-            <table>
-                <thead>
-                    <td>Date et Heure</td>
-                    <td>Marque du véhicule</td>
-                    <td>Modèle du véhicule</td>
-                </thead>
-                <tbody id="informationReservationPast"></tbody>
-            </table>
-        </div>
         <form action="../php/logout.php" method="post">
             <button type="submit">Se déconnecter</button>
         </form>
