@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0055A4 0%, #FFFFFF 50%, #EF4135 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#contenu {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #0055A4;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+#user {
+    flex: 0 0 35%;
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-top: 5px solid #0055A4;
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#reservation {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-top: 5px solid #FFFFFF;
+}
+
+#reservationPast {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-top: 5px solid #EF4135;
+}
+
+h2 {
+    color: #0055A4;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    border-bottom: 3px solid #0055A4;
+    padding-bottom: 10px;
+}
+
+#reservation h2 {
+    color: #0055A4;
+    border-bottom: 3px solid #0055A4;
+}
+
+#reservationPast h2 {
+    color: #EF4135;
+    border-bottom: 3px solid #EF4135;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+thead {
+    background: linear-gradient(135deg, #0055A4 0%, #003d7a 100%);
+}
+
+#reservation thead {
+    background: linear-gradient(135deg, #0055A4 0%, #003d7a 100%);
+}
+
+#reservationPast thead {
+    background: linear-gradient(135deg, #EF4135 0%, #c9342b 100%);
+}
+
+thead td {
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #f0f4ff;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody td {
+    padding: 15px;
+    color: #333;
+}
+
+@media (max-width: 968px) {
+    .container {
+        flex-direction: column;
+    }
+
+    #user {
+        flex: 1;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+}
