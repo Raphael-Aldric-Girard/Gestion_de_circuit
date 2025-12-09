@@ -1,58 +1,51 @@
 <?php
-    require('../js/redirectionInfoUser.js');
+    // require('../js/redirectionInfoUser.js'); // ❌ À supprimer
     require_once('includes/connexion.php');
     
-    try{
-    // vérification des paramètres POST
+    // Démarrer la session dès le début
+    session_start();
+    
+    try {
+        // Vérification des paramètres POST
         if (!isset($_POST['identifiant']) || !isset($_POST['password'])) {
-            echo "Champs d'authentification manquants";
-            exit;
+            die("Champs d'authentification manquants");
         }
 
-        // préparation de la requête
-        if (!($stmt = $pdo->prepare('SELECT mdp, IdEntite FROM Entite WHERE Identifiant = :identifiant;'))) {
-            echo "Echec de la préparation : (" . $pdo->errorCode() . ") " . implode(", ", $pdo->errorInfo());
-        }
-
-        // récupération des paramètres
+        // Récupération des paramètres
         $identifiant = htmlspecialchars($_POST['identifiant'], ENT_QUOTES, 'UTF-8');
-        $mdp_user = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
+        $mdp_user = $_POST['password']; // ✅ Ne PAS utiliser htmlspecialchars sur le mot de passe !
 
-        // liaison des paramètres (identifiant en chaîne)
+        // Préparation et exécution de la requête
+        $stmt = $pdo->prepare('SELECT mdp, IdEntite FROM Entite WHERE Identifiant = :identifiant');
         $stmt->bindParam(':identifiant', $identifiant, PDO::PARAM_STR);
-
-        // exécution de la requête
         $stmt->execute();
 
-        // récupération du mot de passe stocké (une seule lecture)
-        $arrColumn = $stmt->fetchall();
-        $mdp = $arrColumn[0][0];
-        var_dump($arrColumn);
-        echo $mdp;
-        if ($arrColumn === false) {
-            echo ("Identifiant introuvable");
-        } elseif ($mdp_user === $mdp) {
+        // Récupération du résultat
+        $arrColumn = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $id = $arrColumn[0][1];
-            session_start();
-            // creation de cookie de connection
+        // Vérification si l'utilisateur existe
+        if (empty($arrColumn)) { // ✅ Bon test pour tableau vide
+            die("Identifiant introuvable");
+        }
+
+        $mdp = $arrColumn[0]['mdp'];
+        $id = $arrColumn[0]['IdEntite'];
+
+        // Comparaison du mot de passe
+        if ($mdp_user === $mdp) { // ✅ Utiliser === pour comparaison stricte
+            // Création de la session
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $id;
             setcookie('user_name', $id, time() + (24 * 60 * 60), '/');
+            
             header('Location: ../html/informationCompte.html');
-        
             exit;
         } else {
-            echo ("Échec de la connexion : mot de passe incorrect");
-            header('Location: ../html/erreurIdMdp.html');
+            die("Échec de la connexion : mot de passe incorrect");
         }
 
+    } catch (PDOException $e) {
+        error_log('Erreur BDD : ' . $e->getMessage());
+        die('Erreur lors de la connexion à la BDD');
     }
-    catch (PDOException $e) {
-        $msg = 'erreur lors de la connection à la BDD ou de l\'exécution de la requête : ' . $e->getMessage();
-        echo($msg);
-    }
-
-
-
 ?>
