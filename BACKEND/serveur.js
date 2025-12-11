@@ -217,7 +217,6 @@ app.get('/toutes-reservations', (req, res) => {
     INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule
     INNER JOIN Client C ON R.IdClient = C.IdClient
     INNER JOIN Entite E ON C.IdEntite = E.IdEntite
-    WHERE S.DateSession < NOW()
     ORDER BY S.DateSession DESC;
     `;
 
@@ -262,7 +261,7 @@ app.get('/toutes-reservations/today', (req, res)=> {
         
         res.json(results);
     });
-});
+}); 
 
 app.get('/toutes-reservations/past', (req, res)=> {
     console.log('Route /toutes-reservations/past appelée');
@@ -280,7 +279,39 @@ app.get('/toutes-reservations/past', (req, res)=> {
     INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule
     INNER JOIN Client C ON R.IdClient = C.IdClient
     INNER JOIN Entite E ON C.IdEntite = E.IdEntite
-    WHERE S.DateSession >= NOW()
+    WHERE S.DateSession < NOW()
+    ORDER BY S.DateSession DESC;
+    `;
+
+    connection.query(query, (err, results)=> {
+        if (err) {
+            console.error('Erreur SQL  :', err);
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
+        }
+        
+        console.log('Résultats de la requête :', results); // Debug important
+        
+        res.json(results);
+    });
+});
+
+app.get('/toutes-reservations/comming', (req, res)=> {
+    console.log('Route /toutes-reservations/past appelée');
+    const query = `
+    SELECT 
+        S.IdSession, 
+        S.NbReservationMax, 
+        S.DateSession, 
+        V.Marque, 
+        V.Modele, 
+        C.Prenom, 
+        E.Nom
+    FROM Session S
+    INNER JOIN Reservation R ON S.IdSession = R.IdSession
+    INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule
+    INNER JOIN Client C ON R.IdClient = C.IdClient
+    INNER JOIN Entite E ON C.IdEntite = E.IdEntite
+    WHERE S.DateSession > NOW()
     ORDER BY S.DateSession DESC;
     `;
 
