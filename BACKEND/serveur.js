@@ -39,6 +39,12 @@ app.listen(PORT, () => {
     console.log(`Serveur backend opérationnel : http://172.16.194.254:${PORT}`);
 });
 
+/***********************************************************************************/
+/**
+ * Routes utilisées par l'application Légère
+ */
+/***********************************************************************************/
+
 /**
  * Route qui permets de récupérer les informations de l'utilisateur sur l'application légère 
  * en récupérant sont cookie de connexion.
@@ -142,6 +148,12 @@ app.get('/evenement', (req, res) => {
     });
 });
 
+/***********************************************************************************/
+/**
+ * Routes utilisées par l'application lourde
+ */
+/***********************************************************************************/
+
 app.post('/login', (req, res) => {
     console.log('Route /login appelée');
     const { identifiant, mdp } = req.body;
@@ -160,7 +172,7 @@ app.post('/login', (req, res) => {
         LEFT JOIN Personnel p ON e.IdEntite = p.IdEntite
         WHERE e.Identifiant = ? AND e.mdp = ?
     `;
-    
+
     console.log('Identifiant:', identifiant);
     console.log('Mot de passe:', mdp);
 
@@ -186,5 +198,100 @@ app.post('/login', (req, res) => {
                 Poste: results[0].idPoste
             }
         });
+    });
+});
+
+app.get('/toutes-reservations', (req, res) => {
+    console.log('Route /toutes-reservations appelée');
+    const query = `
+    SELECT 
+        S.IdSession, 
+        S.NbReservationMax, 
+        S.DateSession, 
+        V.Marque, 
+        V.Modele, 
+        C.Prenom, 
+        E.Nom
+    FROM Session S
+    INNER JOIN Reservation R ON S.IdSession = R.IdSession
+    INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule
+    INNER JOIN Client C ON R.IdClient = C.IdClient
+    INNER JOIN Entite E ON C.IdEntite = E.IdEntite
+    WHERE S.DateSession < NOW()
+    ORDER BY S.DateSession DESC;
+    `;
+
+    connection.query(query, (err, results)=> {
+        if (err) {
+            console.error('Erreur SQL  :', err);
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
+        }
+        
+        console.log('Résultats de la requête :', results); // Debug important
+        
+        res.json(results);
+    });
+});
+
+app.get('/toutes-reservations/today', (req, res)=> {
+    console.log('Route /toutes-reservations/upcoming appelée');
+    const query = `
+    SELECT 
+        S.IdSession, 
+        S.NbReservationMax, 
+        S.DateSession, 
+        V.Marque, 
+        V.Modele, 
+        C.Prenom, 
+        E.Nom
+    FROM Session S
+    INNER JOIN Reservation R ON S.IdSession = R.IdSession
+    INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule
+    INNER JOIN Client C ON R.IdClient = C.IdClient
+    INNER JOIN Entite E ON C.IdEntite = E.IdEntite
+    WHERE S.DateSession = NOW()
+    ORDER BY S.DateSession DESC;
+    `;
+    connection.query(query, (err, results)=> {
+        if (err) {
+            console.error('Erreur SQL  :', err);
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
+        }
+        
+        console.log('Résultats de la requête :', results); // Debug important
+        
+        res.json(results);
+    });
+});
+
+app.get('/toutes-reservations/past', (req, res)=> {
+    console.log('Route /toutes-reservations/past appelée');
+    const query = `
+    SELECT 
+        S.IdSession, 
+        S.NbReservationMax, 
+        S.DateSession, 
+        V.Marque, 
+        V.Modele, 
+        C.Prenom, 
+        E.Nom
+    FROM Session S
+    INNER JOIN Reservation R ON S.IdSession = R.IdSession
+    INNER JOIN Vehicule V ON R.IdVehicule = V.IdVehicule
+    INNER JOIN Client C ON R.IdClient = C.IdClient
+    INNER JOIN Entite E ON C.IdEntite = E.IdEntite
+    WHERE S.DateSession >= NOW()
+    ORDER BY S.DateSession DESC;
+    `;
+
+    connection.query(query, (err, results)=> {
+        if (err) {
+            console.error('Erreur SQL  :', err);
+            return res.status(500).json({ message: 'Erreur interne au serveur' });
+        }
+        
+        console.log('Résultats de la requête :', results); // Debug important
+        
+        res.json(results);
     });
 });
