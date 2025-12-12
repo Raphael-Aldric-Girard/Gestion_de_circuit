@@ -1,6 +1,9 @@
 <?php
     // require('../js/redirectionInfoUser.js'); // ❌ À supprimer
     require_once('includes/connexion.php');
+    include_once('../../vendor/autoload.php');
+
+    Sentry\Init(['dsn' => 'http://ab62b5fb0837424aa4b3a9290c4daa6a@172.16.0.100:8000/1']);
     
     // Démarrer la session dès le début
     session_start();
@@ -37,8 +40,8 @@
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $id;
             setcookie('user_name', $id, time() + (24 * 60 * 60), '/');
-            
             header('Location: ../html/informationCompte.html');
+            throw new Exception("Gestion de circuit : "+$identifiant+" est connecté !");
             exit;
         } else {
             die("Échec de la connexion : mot de passe incorrect");
