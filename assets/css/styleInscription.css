@@ -48,7 +48,7 @@
 }
 
 /* Style du bouton */
-.contenu button[type="submit"]{
+.contenu button[type="submit"] {
     width: 100%;
     padding: 14px;
     background: linear-gradient(135deg, #ff2e2e 0%, #cc0000 100%);
@@ -92,17 +92,27 @@
     margin-bottom: 20px;
 }
 
-#redirect_auth:hover {
-  color: #ff2e2e;
+
+#redirect_inscription {
+    text-align: center;
+    color: #ff2e2e;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-#redirect_auth::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  transition: width 0.3s ease;
+#redirect_inscription:hover {
+    color: #ff2e2e;
+}
+
+#redirect_inscription::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: linear-gradient(135deg, #667eea 0%, #ff2e2e 100%);
+    transition: width 0.3s ease;
 }
