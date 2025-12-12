@@ -92,7 +92,7 @@
     } catch(Exception $e) {
         // En cas d'erreur, annulation de toutes les opérations
         $pdo->rollBack();
-        error_log("Erreur inscription : " . $e->getMessage());
+        error_log("Erreur inscription ☠️☠️☠️☠️☠️☠️⚰️⚰️⚰️⚰️⚰️⚰️⚰️ : " . $e->getMessage());
         header("Location: ../html/erreur/erreurSysteme.html");
         exit();
     }

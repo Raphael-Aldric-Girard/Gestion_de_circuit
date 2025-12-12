@@ -51,7 +51,7 @@
         }
 
     } catch (PDOException $e) {
-        error_log('Erreur BDD : ' . $e->getMessage());
+        error_log('Erreur BDD ☠️☠️☠️☠️⚰️⚰️: ' . $e->getMessage());
         die('Erreur lors de la connexion à la BDD');
     }
 ?>
