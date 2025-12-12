@@ -3,7 +3,7 @@
     require_once('includes/connexion.php');
     include_once('../../vendor/autoload.php');
 
-    Sentry\Init(['dsn' => 'http://ab62b5fb0837424aa4b3a9290c4daa6a@http://172.16.0.100:8000/11']);
+    Sentry\Init(['dsn' => 'http://c59212feb7e244a19d9bf0c88e3fb7e5@172.16.0.100:8000/11']);
     
     // Démarrer la session dès le début
     session_start();
@@ -41,10 +41,12 @@
             $_SESSION['username'] = $id;
             setcookie('user_name', $id, time() + (24 * 60 * 60), '/');
             header('Location: ../html/informationCompte.html');
-            \Sentry\captureMessage("Gestion de circuit : "+$identifiant+" est connecté !", \Sentry\Severity::info());
+            throw new Exception("My first GlitchTip error!");
+            \Sentry\captureMessage("👌Gestion de circuit : "+$identifiant+" est connecté ! 👌", \Sentry\Severity::info());
             exit;
         } else {
-            \Sentry\captureMessage("Gestion de circuit : Mot de passe incorrect pour "+$identifiant, \Sentry\Severity::warning());
+            throw new Exception("My first GlitchTip error!");
+            \Sentry\captureMessage("‼️Gestion de circuit : Mot de passe incorrect pour "+$identifiant+" ‼️", \Sentry\Severity::warning());
             die("Échec de la connexion : mot de passe incorrect");
         }
 
