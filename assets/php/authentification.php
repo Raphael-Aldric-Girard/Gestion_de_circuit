@@ -3,7 +3,7 @@
     require_once('includes/connexion.php');
     include_once('../../vendor/autoload.php');
 
-    Sentry\Init(['dsn' => 'http://ab62b5fb0837424aa4b3a9290c4daa6a@172.16.0.100:8000/1']);
+    Sentry\Init(['dsn' => 'http://ab62b5fb0837424aa4b3a9290c4daa6a@http://172.16.0.100:8000/11']);
     
     // Démarrer la session dès le début
     session_start();
