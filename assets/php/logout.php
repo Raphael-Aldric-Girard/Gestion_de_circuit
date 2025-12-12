@@ -1,4 +1,8 @@
 <?php
+
+include_once('../../vendor/autoload.php');
+Sentry\Init(['dsn' => 'http://c59212feb7e244a19d9bf0c88e3fb7e5@172.16.0.100:8000/11']);
+    
 // Détruit la session et redirige vers la page d'authentification
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -29,7 +33,14 @@ if (isset($_COOKIE['user_name'])) {
 }
 
 // Détruire la session côté serveur
-session_destroy();
+if(session_destroy()) {
+    // Session détruite avec succès
+    \Sentry\captureMessage("🙈🙉Gestion de circuit : Utilisateur déconnecté 🥸", \Sentry\Severity::info());
+}
+else {
+    \Sentry\captureMessage("🐷🐮Gestion de circuit : Échec de la déconnexion de l'utilisateur ⚠️", \Sentry\Severity::warning());
+};
+
 
 // Redirection vers la page d'authentification
 header('Location: ../html/authentification.html');
