@@ -116,3 +116,7 @@
     background: linear-gradient(135deg, #667eea 0%, #ff2e2e 100%);
     transition: width 0.3s ease;
 }
+
+#redirect_inscription:hover::after {
+  width: 100%;
+}
