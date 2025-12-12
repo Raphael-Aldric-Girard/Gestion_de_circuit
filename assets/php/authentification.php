@@ -41,9 +41,10 @@
             $_SESSION['username'] = $id;
             setcookie('user_name', $id, time() + (24 * 60 * 60), '/');
             header('Location: ../html/informationCompte.html');
-            throw new Exception("Gestion de circuit : "+$identifiant+" est connecté !");
+            \Sentry\captureMessage("Gestion de circuit : "+$identifiant+" est connecté !", \Sentry\Severity::info());
             exit;
         } else {
+            \Sentry\captureMessage("Gestion de circuit : Mot de passe incorrect pour "+$identifiant, \Sentry\Severity::warning());
             die("Échec de la connexion : mot de passe incorrect");
         }
 
