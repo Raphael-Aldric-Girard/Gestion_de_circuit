@@ -2,6 +2,10 @@
     // Connexion à la base de données
     require_once('includes/connexion.php');
 
+    include_once('../../vendor/autoload.php');
+
+    Sentry\Init(['dsn' => 'http://c59212feb7e244a19d9bf0c88e3fb7e5@172.16.0.100:8000/11']);
+
     // Récupération des variables nécessaires
     $id = htmlspecialchars(trim($_POST['identifiant']), ENT_QUOTES, 'UTF-8');
     $nom = htmlspecialchars(trim($_POST['nom']), ENT_QUOTES, 'UTF-8');
@@ -13,12 +17,14 @@
 
     // Validation de l'email
     if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
+        \Sentry\captureMessage("‼️Gestion de circuit : Email invalide pour l'inscription de ".$id." ‼️", \Sentry\Severity::warning());
         header("Location: ../html/erreur/erreurEmail.html");
         exit(); 
     }
     
     // Vérification si le mot de passe de confirmation correspond au mot de passe
     if($confirmMdp !== $mdp){
+        \Sentry\captureMessage("‼️Gestion de circuit : Mot de passe et confirmation non identiques pour l'inscription de ".$id." ‼️", \Sentry\Severity::warning());
         header("Location: ../html/erreur/erreurMdp.html");
         exit(); 
     }
@@ -35,6 +41,7 @@
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if($result['nb'] > 0){
+        \Sentry\captureMessage("‼️Gestion de circuit : ".$mail." déjà utilisé pour l'inscription de ".$id." ‼️", \Sentry\Severity::warning());
         header("Location: ../html/erreur/erreurInscription.html");
         exit(); 
     }
@@ -47,6 +54,7 @@
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if($result['nb'] > 0){
+        \Sentry\captureMessage("‼️Gestion de circuit : Identifiant déjà utilisé pour l'inscription de ".$id." ‼️", \Sentry\Severity::warning());
         header("Location: ../html/erreur/erreurIdentifiant.html");
         exit(); 
     }
@@ -67,6 +75,7 @@
 
         // Récupération de l'ID inséré
         $idEntite = $pdo->lastInsertId();
+        \Sentry\captureMessage("👌Gestion de circuit : Nouvel utilisateur inscrit avec l'identifiant ".$id." 👌", \Sentry\Severity::info());
 
         // Enregistrement du client dans la table client
         $sql = "INSERT INTO `Client`(`Prenom`, `Age`, `IdEntite`) VALUES (:prenom, :age, :idEntite)";
@@ -85,7 +94,7 @@
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $idEntite;
             setcookie('user_name', $idEntite, time() + (24 * 60 * 60), '/');
-
+            \Sentry\captureMessage("👌Gestion de circuit : ".$id." est connecté après inscription ! 👌", \Sentry\Severity::info());
         header('Location: ../html/informationCompte.html');
         exit(); 
 
