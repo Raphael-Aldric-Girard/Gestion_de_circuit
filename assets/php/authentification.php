@@ -41,15 +41,15 @@
             $_SESSION['username'] = $id;
             setcookie('user_name', $id, time() + (24 * 60 * 60), '/');
             header('Location: ../html/informationCompte.html');
-            \Sentry\captureMessage("Gestion de circuit : "+$identifiant+" est connecté !", \Sentry\Severity::info());
+            \Sentry\captureMessage("Gestion de circuit : "+$identifiant+" est connecté 🥸🥸🥸🥸🥸🥸🥸🥸🥸🥸🥸!", \Sentry\Severity::info());
             exit;
         } else {
             \Sentry\captureMessage("Gestion de circuit : Mot de passe incorrect pour "+$identifiant, \Sentry\Severity::warning());
-            die("Échec de la connexion : mot de passe incorrect");
+            die("Échec de la connexion : mot de passe incorrect ☠️☠️☠️⚰️☠️⚰️☠️⚰️☠️☠️");
         }
 
     } catch (PDOException $e) {
-        error_log('Erreur BDD : ' . $e->getMessage());
+        error_log('Erreur BDD ☠️☠️☠️☠️⚰️⚰️: ' . $e->getMessage());
         die('Erreur lors de la connexion à la BDD');
     }
 ?>
