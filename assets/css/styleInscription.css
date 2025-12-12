@@ -91,3 +91,18 @@
     color: #1a1a5e;
     margin-bottom: 20px;
 }
+
+#redirect_auth:hover {
+  color: #ff2e2e;
+}
+
+#redirect_auth::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
