@@ -93,7 +93,7 @@
 }
 
 
-#redirect_inscription {
+#redirect_auth {
     text-align: center;
     color: #ff2e2e;
     text-decoration: none;
@@ -102,11 +102,11 @@
     position: relative;
 }
 
-#redirect_inscription:hover {
+#redirect_auth:hover {
     color: #ff2e2e;
 }
 
-#redirect_inscription::after {
+#redirect_auth::after {
     content: '';
     position: absolute;
     width: 0;
